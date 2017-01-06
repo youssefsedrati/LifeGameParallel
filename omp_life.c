@@ -114,6 +114,8 @@
 		}
 
 		num_alive = 0;
+		#pragma omp parallel for private(i) reduction(+:num_alive)
+		
 		for (j = 1; j <= BS; j++) {
 		    for (i = 1; i <= BS; i++) {
 			if ( (ngb( i, j ) < 2) ||
