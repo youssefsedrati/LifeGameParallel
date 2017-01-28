@@ -1,15 +1,18 @@
 #include "Board.h"
+#include "DistributedBoard.h"
 #include "runPthreads.h"
 
 #include <assert.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <stdlib.h>
 
 /* Private */
 
 typedef struct Task
 {
     int nbIters;
+    int blockSize;
     Board *b;
     int threadNo;
     int nbThreads;
@@ -46,21 +49,22 @@ static void *work(void *args)
         count_neighbours_col(b, end - 1);
         assert(sem_post(task->semReadRight + task->threadNo) == 0);
 
-        count_neighbours_block_col(b, start + 1, end - 1);
+        count_neighbours_block_col(b, start + 1, end - 1, task->blockSize);
 
         // Update the state of the internal cells + the corresponding ghost cells
-        for (int x = start + 1; x < end - 1; x++)
-            update_state_col(b, x);                                                   // includes top and bottom ghost cells
+        update_state_block_col(b, start + 1, end -1);                       // includes top and bottom ghost cells
 
         // Update the state of the border cells + the corresponding ghost cells
         assert(sem_wait(task->semReadRight + prevThread) == 0);
-        update_state_col(b, start);                                                   // includes top and bottom ghost cells
-        if (task->threadNo == 0) copy_state_col(b, b->Nx, 0);                         // right ghost cells (including corners)
+        update_state_col(b, start);                                         // includes top and bottom ghost cells
+        if (task->threadNo == 0)
+            copy_state_col(b, b->Nx, 0);                                    // right ghost cells (including corners)
         assert(sem_post(task->semWrittenLeft + task->threadNo) == 0);
 
         assert(sem_wait(task->semReadLeft + nextThread) == 0);
         update_state_col(b, end - 1);
-        if (task->threadNo == task->nbThreads - 1) copy_state_col(b, -1, b->Nx - 1);  // left ghost cells (including corners)
+        if (task->threadNo == task->nbThreads - 1)
+            copy_state_col(b, -1, b->Nx - 1);                               // left ghost cells (including corners)
         assert(sem_post(task->semWrittenRight + task->threadNo) == 0);
     }
     return NULL;
@@ -68,8 +72,13 @@ static void *work(void *args)
 
 /* Public */
 
-void run_pthreads(Board *b, int nbIterations, int nbThreads)
+void run_pthreads(DistributedBoard *db, int nbIterations)
 {
+    int blockSize = (getenv("BLOCK_SIZE") == NULL) ? 4096 : atoi(getenv("BLOCK_SIZE"));
+    int nbThreads = (getenv("NUM_THREADS") == NULL) ? 1: atoi(getenv("NUM_THREADS"));
+    Board *b = db->b;
+    assert(db->N % nbThreads == 0);
+
     pthread_t threads[nbThreads];
     Task tasks[nbThreads];
     sem_t semReadLeft[nbThreads];
@@ -80,6 +89,7 @@ void run_pthreads(Board *b, int nbIterations, int nbThreads)
     for (int i = 0; i < nbThreads; i++)
     {
         tasks[i].nbIters = nbIterations;
+        tasks[i].blockSize = blockSize;
         tasks[i].b = b;
         tasks[i].threadNo = i;
         tasks[i].nbThreads = nbThreads;

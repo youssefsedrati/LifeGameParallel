@@ -48,10 +48,10 @@ RM = /home/ethiery/.local/share/umake/ide/clion/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ethiery/Cours/PRCD/TDP/TDP6/funWithLife
+CMAKE_SOURCE_DIR = /home/ethiery/Cours/PRCD/TDP/TDP6/LifeGameParallel
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ethiery/Cours/PRCD/TDP/TDP6/funWithLife
+CMAKE_BINARY_DIR = /home/ethiery/Cours/PRCD/TDP/TDP6/LifeGameParallel
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ethiery/Cours/PRCD/TDP/TDP6/funWithLife/CMakeFiles /home/ethiery/Cours/PRCD/TDP/TDP6/funWithLife/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ethiery/Cours/PRCD/TDP/TDP6/LifeGameParallel/CMakeFiles /home/ethiery/Cours/PRCD/TDP/TDP6/LifeGameParallel/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ethiery/Cours/PRCD/TDP/TDP6/funWithLife/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ethiery/Cours/PRCD/TDP/TDP6/LifeGameParallel/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,71 +111,43 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named funWithLife
+# Target rules for targets named tests
 
 # Build rule for target.
-funWithLife: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 funWithLife
-.PHONY : funWithLife
+tests: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tests
+.PHONY : tests
 
 # fast build rule for target.
-funWithLife/fast:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/build
-.PHONY : funWithLife/fast
+tests/fast:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
+.PHONY : tests/fast
 
-Board.o: Board.c.o
+#=============================================================================
+# Target rules for targets named main
 
-.PHONY : Board.o
+# Build rule for target.
+main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
-# target to build an object file
-Board.c.o:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/Board.c.o
-.PHONY : Board.c.o
+# fast build rule for target.
+main/fast:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
 
-Board.i: Board.c.i
+#=============================================================================
+# Target rules for targets named liblife
 
-.PHONY : Board.i
+# Build rule for target.
+liblife: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 liblife
+.PHONY : liblife
 
-# target to preprocess a source file
-Board.c.i:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/Board.c.i
-.PHONY : Board.c.i
-
-Board.s: Board.c.s
-
-.PHONY : Board.s
-
-# target to generate assembly for a file
-Board.c.s:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/Board.c.s
-.PHONY : Board.c.s
-
-DistributedBoard.o: DistributedBoard.c.o
-
-.PHONY : DistributedBoard.o
-
-# target to build an object file
-DistributedBoard.c.o:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/DistributedBoard.c.o
-.PHONY : DistributedBoard.c.o
-
-DistributedBoard.i: DistributedBoard.c.i
-
-.PHONY : DistributedBoard.i
-
-# target to preprocess a source file
-DistributedBoard.c.i:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/DistributedBoard.c.i
-.PHONY : DistributedBoard.c.i
-
-DistributedBoard.s: DistributedBoard.c.s
-
-.PHONY : DistributedBoard.s
-
-# target to generate assembly for a file
-DistributedBoard.c.s:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/DistributedBoard.c.s
-.PHONY : DistributedBoard.c.s
+# fast build rule for target.
+liblife/fast:
+	$(MAKE) -f liblife/CMakeFiles/liblife.dir/build.make liblife/CMakeFiles/liblife.dir/build
+.PHONY : liblife/fast
 
 main.o: main.c.o
 
@@ -183,7 +155,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/main.c.o
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -192,7 +164,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/main.c.i
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -201,143 +173,35 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/main.c.s
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.c.s
 .PHONY : main.c.s
 
-runMpiOMP.o: runMpiOMP.c.o
+tests.o: tests.c.o
 
-.PHONY : runMpiOMP.o
-
-# target to build an object file
-runMpiOMP.c.o:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runMpiOMP.c.o
-.PHONY : runMpiOMP.c.o
-
-runMpiOMP.i: runMpiOMP.c.i
-
-.PHONY : runMpiOMP.i
-
-# target to preprocess a source file
-runMpiOMP.c.i:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runMpiOMP.c.i
-.PHONY : runMpiOMP.c.i
-
-runMpiOMP.s: runMpiOMP.c.s
-
-.PHONY : runMpiOMP.s
-
-# target to generate assembly for a file
-runMpiOMP.c.s:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runMpiOMP.c.s
-.PHONY : runMpiOMP.c.s
-
-runMpiSeq.o: runMpiSeq.c.o
-
-.PHONY : runMpiSeq.o
+.PHONY : tests.o
 
 # target to build an object file
-runMpiSeq.c.o:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runMpiSeq.c.o
-.PHONY : runMpiSeq.c.o
+tests.c.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests.c.o
+.PHONY : tests.c.o
 
-runMpiSeq.i: runMpiSeq.c.i
+tests.i: tests.c.i
 
-.PHONY : runMpiSeq.i
-
-# target to preprocess a source file
-runMpiSeq.c.i:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runMpiSeq.c.i
-.PHONY : runMpiSeq.c.i
-
-runMpiSeq.s: runMpiSeq.c.s
-
-.PHONY : runMpiSeq.s
-
-# target to generate assembly for a file
-runMpiSeq.c.s:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runMpiSeq.c.s
-.PHONY : runMpiSeq.c.s
-
-runOMP.o: runOMP.c.o
-
-.PHONY : runOMP.o
-
-# target to build an object file
-runOMP.c.o:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runOMP.c.o
-.PHONY : runOMP.c.o
-
-runOMP.i: runOMP.c.i
-
-.PHONY : runOMP.i
+.PHONY : tests.i
 
 # target to preprocess a source file
-runOMP.c.i:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runOMP.c.i
-.PHONY : runOMP.c.i
+tests.c.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests.c.i
+.PHONY : tests.c.i
 
-runOMP.s: runOMP.c.s
+tests.s: tests.c.s
 
-.PHONY : runOMP.s
-
-# target to generate assembly for a file
-runOMP.c.s:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runOMP.c.s
-.PHONY : runOMP.c.s
-
-runPthreads.o: runPthreads.c.o
-
-.PHONY : runPthreads.o
-
-# target to build an object file
-runPthreads.c.o:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runPthreads.c.o
-.PHONY : runPthreads.c.o
-
-runPthreads.i: runPthreads.c.i
-
-.PHONY : runPthreads.i
-
-# target to preprocess a source file
-runPthreads.c.i:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runPthreads.c.i
-.PHONY : runPthreads.c.i
-
-runPthreads.s: runPthreads.c.s
-
-.PHONY : runPthreads.s
+.PHONY : tests.s
 
 # target to generate assembly for a file
-runPthreads.c.s:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runPthreads.c.s
-.PHONY : runPthreads.c.s
-
-runSeq.o: runSeq.c.o
-
-.PHONY : runSeq.o
-
-# target to build an object file
-runSeq.c.o:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runSeq.c.o
-.PHONY : runSeq.c.o
-
-runSeq.i: runSeq.c.i
-
-.PHONY : runSeq.i
-
-# target to preprocess a source file
-runSeq.c.i:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runSeq.c.i
-.PHONY : runSeq.c.i
-
-runSeq.s: runSeq.c.s
-
-.PHONY : runSeq.s
-
-# target to generate assembly for a file
-runSeq.c.s:
-	$(MAKE) -f CMakeFiles/funWithLife.dir/build.make CMakeFiles/funWithLife.dir/runSeq.c.s
-.PHONY : runSeq.c.s
+tests.c.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests.c.s
+.PHONY : tests.c.s
 
 # Help Target
 help:
@@ -347,31 +211,15 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... funWithLife"
-	@echo "... Board.o"
-	@echo "... Board.i"
-	@echo "... Board.s"
-	@echo "... DistributedBoard.o"
-	@echo "... DistributedBoard.i"
-	@echo "... DistributedBoard.s"
+	@echo "... tests"
+	@echo "... main"
+	@echo "... liblife"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... runMpiOMP.o"
-	@echo "... runMpiOMP.i"
-	@echo "... runMpiOMP.s"
-	@echo "... runMpiSeq.o"
-	@echo "... runMpiSeq.i"
-	@echo "... runMpiSeq.s"
-	@echo "... runOMP.o"
-	@echo "... runOMP.i"
-	@echo "... runOMP.s"
-	@echo "... runPthreads.o"
-	@echo "... runPthreads.i"
-	@echo "... runPthreads.s"
-	@echo "... runSeq.o"
-	@echo "... runSeq.i"
-	@echo "... runSeq.s"
+	@echo "... tests.o"
+	@echo "... tests.i"
+	@echo "... tests.s"
 .PHONY : help
 
 

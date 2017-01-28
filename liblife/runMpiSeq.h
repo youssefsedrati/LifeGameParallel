@@ -4,7 +4,7 @@
 typedef struct DistributedBoard DistributedBoard;
 
 /**
- * Runs a given number of iterations of the game of life on a distributed board
+ * Runs a given number of iterations of the game of life.
  * MPI + sequential synchroneous version.
  *
  * @param db An initialized distributed board
@@ -13,7 +13,7 @@ typedef struct DistributedBoard DistributedBoard;
 extern void run_MPI_seq_sync(DistributedBoard *db, int nbIterations);
 
 /**
- * Runs a given number of iterations of the game of life on a distributed board
+ * Runs a given number of iterations of the game of life.
  * MPI + sequential asynchroneous version.
  *
  * @param db An initialized distributed board

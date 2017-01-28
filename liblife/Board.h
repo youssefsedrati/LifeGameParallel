@@ -23,6 +23,7 @@ typedef struct Board
 
 /* Parameters */
 
+
 /**
  * State change rules definition.
  * STATE_CHANGES[currentState * 9 + nbNeighbours] gives the next state of a cell given its current state
@@ -34,6 +35,7 @@ static const float STATE_CHANGES[] = { 0, 0, 0, 1, 0, 0, 0, 0, 0,
 
 /* Public methods */
 
+
 /**
  * Initialize an empty board of specified size (not counting ghost cells)
  *
@@ -43,6 +45,7 @@ static const float STATE_CHANGES[] = { 0, 0, 0, 1, 0, 0, 0, 0, 0,
  */
 extern void init_board(Board *b, int Nx, int Ny);
 
+
 /**
  * Set the state of a column of cells (ghost cells included)
  * @param b         Pointer on an initialized board
@@ -50,6 +53,7 @@ extern void init_board(Board *b, int Nx, int Ny);
  * @param val       Value to set
  */
 extern void set_col(Board *b, int x, int val);
+
 
 /**
  * Set the state of a row of cells (ghost cells included)
@@ -59,6 +63,7 @@ extern void set_col(Board *b, int x, int val);
  */
 extern void set_row(Board *b, int y, int val);
 
+
 /**
  * Update the neighbours count of a column of cells
  *
@@ -67,14 +72,6 @@ extern void set_row(Board *b, int y, int val);
  */
 extern void count_neighbours_col(Board *b, int x);
 
-/**
- * Update the neighbours count of a block column of cells
- *
- * @param b      An initialized board
- * @param xStart Starting X-coordinate of the block column
- * @param xStop  Stopping X-coordinate of the block column
- */
-extern void count_neighbours_block_col(Board *b, int xStart, int xStop);
 
 /**
  * Update the state of a column of cells (ghost cells included)
@@ -84,6 +81,7 @@ extern void count_neighbours_block_col(Board *b, int xStart, int xStop);
  */
 extern void update_state_col(Board *b, int x);
 
+
 /**
  * Copy the state a source column in a destination column (ghost cells included)
  * @param b    (Initialized) board to update
@@ -92,12 +90,28 @@ extern void update_state_col(Board *b, int x);
  */
 extern void copy_state_col(Board *b, int xDst, int xSrc);
 
+
 /**
- * Output a representation of a board for debugging purposes (excluding the ghost cells)
- * @param stream Stream on which to output the board
- * @param b An initialized board
+ * Update the neighbours count of a block column of cells.
+ * To optimize cache access, use vertical blocking too.
+ *
+ * @param b             An initialized board
+ * @param xStart        Starting X-coordinate of the block column
+ * @param xStop         Stopping X-coordinate of the block column
+ * @param blockSize     Vertical blocking size used for cache optimization
  */
-extern void output_board(FILE *stream, Board *b);
+extern void count_neighbours_block_col(Board *b, int xStart, int xStop, int blockSize);
+
+
+/**
+ * Update the state of a block column of cells (ghost cells included)
+ *
+ * @param b             An initialized board
+ * @param xStart        Starting X-coordinate of the block column
+ * @param xStop         Stopping X-coordinate of the block column
+ */
+extern void update_state_block_col(Board *b, int xStart, int xStop);
+
 
 /**
  * Compare block columns of two board for debugging purposes
@@ -110,6 +124,15 @@ extern void output_board(FILE *stream, Board *b);
  * @return 1 if the boards are identical, 0 else
  */
 extern int compare_boards_block_col(Board *b1, int xStart1, int xStop1, Board *b2, int xStart2, int xStop2);
+
+
+/**
+ * Output a representation of a board for debugging purposes (excluding the ghost cells)
+ * @param stream Stream on which to output the board
+ * @param b An initialized board
+ */
+extern void output_board(FILE *stream, Board *b);
+
 
 /**
  * Release the resources associated with a board.
