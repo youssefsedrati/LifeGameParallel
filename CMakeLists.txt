@@ -11,4 +11,3 @@ set_property(TARGET main PROPERTY C_STANDARD 99)
 add_executable(tests tests.c)
 target_link_libraries(tests liblife)
 set_property(TARGET tests PROPERTY C_STANDARD 99)
-

@@ -2,6 +2,7 @@
 #include <math.h>
 #include <mkl.h>
 #include <string.h>
+#include <assert.h>
 
 #include "Board.h"
 
@@ -38,8 +39,10 @@ void init_board(Board *b, int Nx, int Ny)
     b->Ny = Ny;
     b->ld = b->Ny + 2;
     b->arr = (float *) calloc((size_t) b->ld * b->ld, sizeof(float));
+    assert(b->arr != NULL);
     b->arr = b->arr + b->ld + 1;
     b->nbNgbs = (float *) calloc((size_t) b->Ny * b->Ny, sizeof(float));
+    assert(b->nbNgbs != NULL);
 }
 
 
