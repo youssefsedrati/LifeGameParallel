@@ -1,4 +1,4 @@
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp -O3 -g")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp -O3")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}")
 find_package(MKL REQUIRED)
 include_directories(${MKL_INCLUDE_DIR})
